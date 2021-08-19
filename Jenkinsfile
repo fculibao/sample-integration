@@ -27,7 +27,6 @@ pipeline {
                 }            
             }
         }
-    /*
         stage('Deploy Docker Container into AWS EC2 Instance') {
             steps {
                 echo 'Deploying....'
@@ -39,6 +38,5 @@ pipeline {
                 }
             }
         }
-        */
     }
 }
