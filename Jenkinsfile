@@ -23,7 +23,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
                     sh "docker login -u fculibao -p ${dockerHubPwd}"
                     }
-                    sh 'docker push fculibao/nginx:2.0.0'
+                    sh 'docker push fculibao/nginx'
                 }            
             }
         }
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 script {
-                    def dockerRun = 'docker run -p 80:80 -d --name my-web-server fculibao/nginx:2.0.0'
+                    def dockerRun = 'docker run -p 80:80 -d --name myweb-server fculibao/nginx'
                     sshagent(['web-server']) {
                     sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.82.187 ${dockerRun}"
                     }
