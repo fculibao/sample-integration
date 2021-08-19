@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('SCM Checkout')
+        stage('SCM Checkout') {
             steps {
                git credentialsId: 'git-creds', url: 'https://github.com/fculibao/sample-integration'
             }
