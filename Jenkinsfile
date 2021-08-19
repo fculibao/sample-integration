@@ -23,13 +23,18 @@ pipeline {
                     withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
                     sh "docker login -u fculibao -p ${dockerHubPwd}"
                     }
-                    sh 'docker push fculibao/nodeapp'
+                    sh 'docker push fculibao/nginx'
                 }            
             }
         }
-        stage('Deploy') {
+        stage('Deploy Docker Container into AWS EC2 Instance') {
             steps {
                 echo 'Deploying....'
+                script {
+                    def dockerRun = 'docker run -p 80:80 -d --name my-web-server fculibao/nginx'
+                    sshagent(['webserver']) {
+                    sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.82.187 ${dockerRun}"
+                }
             }
         }
     }
