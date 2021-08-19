@@ -33,7 +33,7 @@ pipeline {
                 script {
                     def dockerRun = 'docker run -p 80:80 -d --name myweb-server fculibao/nginx'
                     sshagent(['web-server']) {
-                    sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.62.12 ${dockerRun}"
+                    sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.82.187 ${dockerRun}"
                     }
                 }
             }
