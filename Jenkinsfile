@@ -9,9 +9,6 @@ pipeline {
             }
         }
         stage('Test') {
-            when {
-                BRANCH_NAME == 'main' 
-            }
             steps {
                 echo 'Testing..'
             }
