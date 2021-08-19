@@ -18,11 +18,13 @@ pipeline {
             }
         }
         stage('Push Docker Image') {
-            script {
-                withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
-                sh "docker login -u fculibao -p ${dockerHubPwd}"
-                }
-                sh 'docker push fculibao/my-app:2.0.0'
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
+                    sh "docker login -u fculibao -p ${dockerHubPwd}"
+                    }
+                    sh 'docker push fculibao/my-app:2.0.0'
+                }            
             }
         }
         stage('Deploy') {
