@@ -10,9 +10,11 @@ pipeline {
         }
         stage('Mvn Pacakge') {
             steps {
-                mvnHome = tool name: 'maven-3.8.2', type: 'maven'
-                mvnCMD = "${mvnHome}/bin/mvn"
-                sh "${mvnCMD} clean package"
+                script {
+                    def mvnHome = tool name: 'maven-3.8.2', type: 'maven'
+                    def mvnCMD = "${mvnHome}/bin/mvn"
+                    sh "${mvnCMD} clean package"
+                } 
             }
         }
         stage('Test') {
