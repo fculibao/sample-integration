@@ -46,3 +46,24 @@ Key points to make this works
                     - REGISTRY CREDENTIALS: add docker_hub credentials you configure on jenkins.
                         - In Jenkins > Manage Jenkins > Manage Credentials > CLick on Jenkins on Store scoped > Global credentials(unrestricted) > On the right click ADD CREDENTAILS.
     
+
+
+INSTALLING DOCKER ON UBUNUT
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+apt-cache policy docker-ce
+sudo apt-get install -y docker-ce
+sudo systemctl status docker
+
+
+
+
+MANAGE DOCKER AS A NON ROOT ON UBUNTU
+
+sudo groupadd docker
+
+
+sudo usermod -a -G docker jenkins
+
