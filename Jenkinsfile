@@ -8,18 +8,13 @@ pipeline {
                 sh 'docker build -t fculibao/sample-integration .'
             }
         }
-        stage('Mvn Pacakge') {
+        stage('Mvn Pacakge Test') {
             steps {
                 script {
                     def mvnHome = tool name: 'maven-3.8.2', type: 'maven'
                     def mvnCMD = "${mvnHome}/bin/mvn"
                     sh "${mvnCMD} clean package"
                 } 
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
             }
         }
         stage('Deploy') {
