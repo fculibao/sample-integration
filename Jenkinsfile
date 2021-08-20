@@ -20,7 +20,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
+                    withCredentials([string(credentialsId: 'docker-access-pwd', variable: 'dockerHubPwd')]) {
                     sh "docker login -u fculibao -p ${dockerHubPwd}"
                     }
                     sh 'docker push fculibao/nginx'
@@ -33,7 +33,7 @@ pipeline {
                 script {
                     def dockerRun = 'docker run -p 80:80 -d --name myweb-server fculibao/nginx'
                     sshagent(['web-server']) {
-                    sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.82.187 ${dockerRun}"
+                    sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.83.107 ${dockerRun}"
                     }
                 }
             }
