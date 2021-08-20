@@ -34,7 +34,7 @@ pipeline {
                 echo 'Deploying....'
                 script {
                     def dockerRun = 'docker run -p 80:80 -d --name web-server fculibao/nginx:2.0.0'
-                    sshagent(['ec2-uesr']) {
+                    sshagent(['ec2-user']) {
                     sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.83.107 ${dockerRun}"
                     }
                 }
