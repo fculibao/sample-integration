@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Image.....'
-                sh 'docker build -t fculibao/nginx .'
+                sh 'docker build -t fculibao/nginx:2.0.0 .'
             }
         }
         stage('Mvn Pacakge Test') {
