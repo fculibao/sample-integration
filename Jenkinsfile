@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'docker build -t fculibao/sample-integration .'
+                sh 'docker build -t fculibao/nginx .'
             }
         }
         stage('Mvn Pacakge Test') {
