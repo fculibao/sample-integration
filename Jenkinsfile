@@ -4,12 +4,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Building Image.....'
                 sh 'docker build -t fculibao/nginx .'
             }
         }
         stage('Mvn Pacakge Test') {
             steps {
+                echo 'Performing Test....'
                 script {
                     def mvnHome = tool name: 'maven-3.8.2', type: 'maven'
                     def mvnCMD = "${mvnHome}/bin/mvn"
@@ -19,6 +20,7 @@ pipeline {
         }
         stage('Push Docker Image') {
             steps {
+                echo 'Pushing New Images.....'
                 script {
                     withCredentials([string(credentialsId: 'docker-access-pwd', variable: 'dockerHubPwd')]) {
                     sh "docker login -u fculibao -p ${dockerHubPwd}"
